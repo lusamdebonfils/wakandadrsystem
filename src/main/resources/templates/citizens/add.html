@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.tymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Supplier Relationship Application</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sketchy/bootstrap.min.css" rel="stylesheet" integrity="sha384-N8DsABZCqc1XWbg/bAlIDk7AS/yNzT5fcKzg/TwfmTuUqZhGquVmpb5VvfmLcMzp" crossorigin="anonymous"/>
+</head>
+<body>
+
+<div style="padding:1em;" class="container">
+    <div th:replace="fragments/navs ::topnav">
+    </div>
+    <div class="row mt-5">
+        <div class="col-3 bg-light shadow p-3 mb-5 mr-3 ml-5">
+            <div th:replace="fragments/navs ::sidenav">
+            </div>
+
+        </div>
+        <div class="col-7 bg-white">
+            <form id="registerPostForm" method="post" action="/wakanda/new/post" th:object="${citizen}">
+                <fieldset>
+                    <legend>Register New Citizen</legend>
+                    <div class="container" style="margin-top: 1em;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="hidden" name="citizenId" th:value="${citizen.citizenId}"/>
+                                <div class="form-group" style="margin-top: 1em;">
+                                    <label for="ssn">Social Security Number</label>
+                                    <span th:if="${#fields.hasErrors('ssn')}" th:errors="*{ssn}"
+                                          class="alert alert-danger"></span>
+                                    <input tabindex="1" id="ssn" name="ssn" type="text" class="form-control" value=""
+                                           th:value="${citizen.ssn}" required autofocus/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" style="margin-top: 1em;">
+                                    <label for="state">State where Born</label>
+                                    <select class="form-control"  id="state" name="state">
+                                        <option value="0">Select State</option>
+                                        <option th:each="stat : ${states}" th:value="${stat.stateId}" th:text="${stat.stateName}"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                                          class="alert alert-danger"></span>
+                                    <input tabindex="2" id="firstName" name="firstName" type="text" class="form-control" th:value="${citizen.firstName}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="middleName">Middle Name</label>
+                                    <span th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}"
+                                          class="alert alert-danger"></span>
+                                    <input tabindex="3" id="middleName" name="middleName" type="text" class="form-control" th:value="${citizen.middleName}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                                          class="alert alert-danger"></span>
+                                    <input tabindex="4" id="lastName" name="lastName" type="text" class="form-control" th:value="${citizen.lastName}"/>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="yearlyIncome">Yearly Income</label>
+                                    <span th:if="${#fields.hasErrors('yearlyIncome')}" th:errors="*{yearlyIncome}"
+                                          class="alert alert-danger"></span>
+                                    <input tabindex="5" id="yearlyIncome" type="number" name="yearlyIncome" class="form-control" th:value="${citizen.yearlyIncome}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="dateOfBirth">Date of Birth</label>
+                                    <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"
+                                          class="alert alert-danger"></span>
+                                    <input tabindex="6" id="dateOfBirth" name="dateOfBirth" type="date" class="form-control"
+                                           aria-describedby="dateOfBirthHelp" th:value="${citizen.dateOfBirth}"/>
+                                    <small id="dateOfBirthHelp" class="form-text text-muted">Enter a valid Date</small>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div>&nbsp;</div>
+                            </div>
+                            <div class="col-md-4">
+                                <div style="text-align: right;">
+                                          <a tabindex="7" href="/wakanda/citizens/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                                    <button tabindex="8" id="btnSubmit" type="submit" class="btn btn-outline-primary">Register</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
